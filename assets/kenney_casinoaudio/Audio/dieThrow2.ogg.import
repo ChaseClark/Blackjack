@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dieThrow2.ogg-b8ce8ba65837c2ddb811374c4e5fcf16.oggstr"
+
+[deps]
+
+source_file="res://assets/kenney_casinoaudio/Audio/dieThrow2.ogg"
+dest_files=[ "res://.import/dieThrow2.ogg-b8ce8ba65837c2ddb811374c4e5fcf16.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

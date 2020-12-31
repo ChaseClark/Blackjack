@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dieShuffle1.ogg-42ee626df908c7158e61fe69e47310df.oggstr"
+
+[deps]
+
+source_file="res://assets/kenney_casinoaudio/Audio/dieShuffle1.ogg"
+dest_files=[ "res://.import/dieShuffle1.ogg-42ee626df908c7158e61fe69e47310df.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

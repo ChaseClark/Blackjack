@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/chipsCollide1.ogg-256f5a46192fe1d12b449e9029c9468c.oggstr"
+
+[deps]
+
+source_file="res://assets/kenney_casinoaudio/Audio/chipsCollide1.ogg"
+dest_files=[ "res://.import/chipsCollide1.ogg-256f5a46192fe1d12b449e9029c9468c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
