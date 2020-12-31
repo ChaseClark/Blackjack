@@ -1,3 +1,31 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dealer/Dealer.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
+position = Vector2( 0, 2.1189 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BackgroundRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.00392157, 0.466667, 0.0431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" parent="." instance=ExtResource( 2 )]
+
+[node name="Dealer" parent="." instance=ExtResource( 3 )]
+position = Vector2( 214.891, 168.881 )
+
+[node name="DealerCardPos" type="Position2D" parent="."]
+position = Vector2( 400, 165.276 )
+
+[node name="PlayerCardPos" type="Position2D" parent="."]
+position = Vector2( 400, 450.272 )

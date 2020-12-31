@@ -8,14 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Card",
+"language": "GDScript",
+"path": "res://cards/Card.gd"
+}, {
+"base": "Node2D",
+"class": "Deck",
+"language": "GDScript",
+"path": "res://cards/Deck.gd"
+} ]
 _global_script_class_icons={
-
+"Card": "",
+"Deck": ""
 }
 
 [application]
 
 config/name="Blackjack"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -45,10 +57,12 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+csv={
+
+}
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
