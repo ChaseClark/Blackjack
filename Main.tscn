@@ -47,41 +47,41 @@ __meta__ = {
 margin_left = 40.0
 margin_top = 40.0
 margin_right = 950.0
-margin_bottom = 486.0
+margin_bottom = 485.0
 
 [node name="LeftVbox" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
 margin_right = 145.0
-margin_bottom = 446.0
+margin_bottom = 445.0
 custom_constants/separation = 30
 alignment = 2
 
 [node name="HitButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
-margin_top = 239.0
+margin_top = 238.0
 margin_right = 145.0
-margin_bottom = 288.0
+margin_bottom = 287.0
 custom_fonts/font = ExtResource( 1 )
 disabled = true
 text = "HIT"
 
 [node name="StandButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
-margin_top = 318.0
+margin_top = 317.0
 margin_right = 145.0
-margin_bottom = 367.0
+margin_bottom = 366.0
 custom_fonts/font = ExtResource( 1 )
 disabled = true
 text = " STAND "
 
 [node name="ResetButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
-margin_top = 397.0
+margin_top = 396.0
 margin_right = 145.0
-margin_bottom = 446.0
+margin_bottom = 445.0
 custom_fonts/font = ExtResource( 1 )
 text = " RESET "
 
 [node name="RightVbox" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
 margin_left = 149.0
 margin_right = 910.0
-margin_bottom = 446.0
+margin_bottom = 445.0
 size_flags_horizontal = 3
 alignment = 1
 

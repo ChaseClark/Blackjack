@@ -15,6 +15,7 @@ onready var stand_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbo
 onready var reset_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbox/ResetButton")
 onready var player_score_label = get_node("../PlayerScoreLabel")
 onready var dealer_score_label = get_node("../DealerScoreLabel")
+onready var card_tween = $CardTween
 
 
 var player_cards = []
@@ -40,12 +41,19 @@ func start_game():
 	hit_button.disabled = true
 	stand_button.disabled = true
 	dealer_score_label.text = "Dealer Score: ???"
+	player_score_label.text = "Player Score: ???"
 	
+	# 2 to dealer
 	deal_card(false,true)
+	yield(card_tween,"tween_completed")
 	deal_card(false,false)
+	yield(card_tween,"tween_completed")
+	# 2 to player, face up
+	deal_card(true,true)
+	yield(card_tween,"tween_completed")
+	deal_card(true,true)
+	yield(card_tween,"tween_completed")
 	
-	deal_card(true,true)
-	deal_card(true,true)
 	calculate_player_score()
 	# enable both hit and stay buttons
 	hit_button.disabled = false
@@ -66,18 +74,30 @@ func deal_card(to_player: bool, face_up: bool) -> void:
 	if to_player:
 		player_cards.append(value)
 		if player_cards.size() == 1:
-			card_instance.global_position = player_card_pos.position
+			card_tween_to_pos(card_instance,global_position,player_card_pos.global_position)
+			last_player_card_pos = player_card_pos.global_position
 		else:
-			card_instance.global_position = last_player_card_pos + card_offset
-		last_player_card_pos = card_instance.global_position
+			card_tween_to_pos(card_instance,global_position,last_player_card_pos + card_offset)
+			last_player_card_pos += card_offset
 	else:
 		dealer_cards.append(value)
 		if dealer_cards.size() == 1:
-			card_instance.global_position = dealer_card_pos.position
+#			card_instance.global_position = dealer_card_pos.position
+			card_tween_to_pos(card_instance,global_position,dealer_card_pos.global_position)
+			last_dealer_card_pos = dealer_card_pos.global_position
 		else:
-			card_instance.global_position = last_dealer_card_pos + card_offset
+#			card_instance.global_position = last_dealer_card_pos + card_offset
+			card_tween_to_pos(card_instance,global_position,last_dealer_card_pos + card_offset)
+			last_dealer_card_pos += card_offset
 			face_down_card = card_instance
-		last_dealer_card_pos = card_instance.global_position
+	
+
+func card_tween_to_pos(card: Card, start_pos: Vector2, end_pos: Vector2) -> void:
+	card_tween.interpolate_property(card, "global_position",
+		start_pos, end_pos, 0.6,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	card_tween.start()
+	
 
 
 func calculate_player_score() -> void:
@@ -143,16 +163,21 @@ func _on_StandButton_pressed() -> void:
 	face_down_card.face_up = true
 	calculate_dealer_score()
 	# dealer hit until value <= 17
+#	for i in range(4):
+#		deal_card(false,true)
+#		yield(card_tween,"tween_completed")
+#		calculate_dealer_score()
 	while dealer_score < 17 or dealer_score < player_score:
 		deal_card(false, true)
+		yield(card_tween,"tween_completed")
 		calculate_dealer_score()
 	# check who wins
-	if dealer_score > player_score:
+	if dealer_score > player_score and dealer_score <= 21:
 		lost()
-	elif dealer_score == player_score and dealer_score < 21:
+	elif dealer_score == player_score and dealer_score <= 21:
 		tied()
 	else:
-		print("reached a state where the dealer may want to draw another card")
+		won()
 	
 
 func _on_ResetButton_pressed() -> void:

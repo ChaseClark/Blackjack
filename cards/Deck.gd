@@ -21,7 +21,6 @@ func reset_deck() -> void:
 				count += 1
 				if count == 14:
 					count = 1
-	print("file closed")
 	file.close()
 
 
@@ -40,11 +39,8 @@ func draw_card() -> Array:
 	# return key
 	var keys: Array = cards.keys()
 	keys.shuffle()
-	print(cards.size())
 	#var i = randi() % keys.size() # pick a random card's key
 	var i = rand_range(0,keys.size())
-	print("i: ",i," size: ",keys.size())
-	print(keys[0])
 	var key = keys[i]
 	var value = cards[key]
 	# remove from dict
