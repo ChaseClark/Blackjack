@@ -6,6 +6,11 @@ extends Node2D
 
 const Card = preload("res://cards/Card.tscn")
 const CARD_SPACING = 40
+const card_shuffle_audio = preload("res://assets/kenney_casinoaudio/chosen_audio/cardFan1.ogg")
+const card_flip_audio = preload("res://assets/kenney_casinoaudio/chosen_audio/cardPlace4.ogg")
+const card_deal_audio = preload("res://assets/kenney_casinoaudio/chosen_audio/cardSlide2.ogg")
+
+
 
 onready var deck = $Deck
 onready var player_card_pos = get_node("../PlayerCardPos")
@@ -16,6 +21,7 @@ onready var reset_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbo
 onready var player_score_label = get_node("../PlayerScoreLabel")
 onready var dealer_score_label = get_node("../DealerScoreLabel")
 onready var card_tween = $CardTween
+onready var audio_player = $AudioStreamPlayer
 
 
 var player_cards = []
@@ -36,6 +42,9 @@ func start_game():
 	# break this out into a method that takes in a pos and player bool
 	# add a point2d for the first dealer and player card to be placed
 	# start with buttons disabled
+	audio_player.stream = card_shuffle_audio
+	audio_player.play()
+	yield(audio_player,"finished")
 	randomize()
 	deck.reset_deck()
 	hit_button.disabled = true
@@ -61,6 +70,8 @@ func start_game():
 
 func deal_card(to_player: bool, face_up: bool) -> void:
 	# if not empty then use the pos2d
+	audio_player.stream = card_deal_audio
+	audio_player.play()
 	var card_arr = deck.draw_card()
 	var key = card_arr[0]
 	var value = card_arr[1]
@@ -94,7 +105,7 @@ func deal_card(to_player: bool, face_up: bool) -> void:
 
 func card_tween_to_pos(card: Card, start_pos: Vector2, end_pos: Vector2) -> void:
 	card_tween.interpolate_property(card, "global_position",
-		start_pos, end_pos, 0.6,
+		start_pos, end_pos, 0.4,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	card_tween.start()
 	
@@ -133,7 +144,7 @@ func calculate_dealer_score() -> void:
 	
 
 func lost():
-	print("player loses! score:", player_score)
+	print("player loses! score:", player_score, " dealer score: ",dealer_score)
 		
 
 func won():
@@ -160,7 +171,10 @@ func _on_HitButton_pressed() -> void:
 func _on_StandButton_pressed() -> void:
 	hit_button.disabled = true
 	stand_button.disabled = true
+	audio_player.stream = card_flip_audio
+	audio_player.play()	
 	face_down_card.face_up = true
+	yield(audio_player,"finished")
 	calculate_dealer_score()
 	# dealer hit until value <= 17
 #	for i in range(4):

@@ -10,3 +10,5 @@ script = ExtResource( 1 )
 scale = Vector2( 2, 2 )
 
 [node name="CardTween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
