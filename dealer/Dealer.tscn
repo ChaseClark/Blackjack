@@ -7,4 +7,4 @@
 script = ExtResource( 1 )
 
 [node name="Deck" parent="." instance=ExtResource( 2 )]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2 )

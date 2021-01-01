@@ -1,6 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/robotomono_32.tres" type="DynamicFont" id=1]
 
 [node name="UI" type="CanvasLayer"]
+layer = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 7.0
@@ -8,10 +11,45 @@ margin_top = 7.0
 margin_right = 1017.0
 margin_bottom = 593.0
 mouse_filter = 2
-custom_constants/margin_right = 100
-custom_constants/margin_top = 100
-custom_constants/margin_left = 100
+custom_constants/margin_right = 60
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
 custom_constants/margin_bottom = 100
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 950.0
+margin_bottom = 486.0
+
+[node name="LeftVbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 164.0
+margin_bottom = 446.0
+custom_constants/separation = 30
+alignment = 2
+
+[node name="HitButton" type="Button" parent="MarginContainer/HBoxContainer/LeftVbox"]
+margin_top = 318.0
+margin_right = 164.0
+margin_bottom = 367.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = " HIT ME "
+
+[node name="StayButton" type="Button" parent="MarginContainer/HBoxContainer/LeftVbox"]
+margin_top = 397.0
+margin_right = 164.0
+margin_bottom = 446.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "STAY"
+
+[node name="RightVbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 168.0
+margin_right = 910.0
+margin_bottom = 446.0
+size_flags_horizontal = 3
+alignment = 1

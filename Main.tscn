@@ -1,31 +1,111 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/robotomono_32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://dealer/Dealer.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
-position = Vector2( 0, 2.1189 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="BackgroundRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color( 0.00392157, 0.466667, 0.0431373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UI" parent="." instance=ExtResource( 2 )]
-
 [node name="Dealer" parent="." instance=ExtResource( 3 )]
-position = Vector2( 214.891, 168.881 )
+position = Vector2( 132.462, 140 )
 
 [node name="DealerCardPos" type="Position2D" parent="."]
-position = Vector2( 400, 165.276 )
+position = Vector2( 400, 140 )
 
 [node name="PlayerCardPos" type="Position2D" parent="."]
-position = Vector2( 400, 450.272 )
+position = Vector2( 400, 450 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+margin_left = 8.25989
+margin_top = 5.74005
+margin_right = 1018.26
+margin_bottom = 591.74
+mouse_filter = 2
+custom_constants/margin_right = 60
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 950.0
+margin_bottom = 486.0
+
+[node name="LeftVbox" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
+margin_right = 145.0
+margin_bottom = 446.0
+custom_constants/separation = 30
+alignment = 2
+
+[node name="HitButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
+margin_top = 239.0
+margin_right = 145.0
+margin_bottom = 288.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "HIT"
+
+[node name="StandButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
+margin_top = 318.0
+margin_right = 145.0
+margin_bottom = 367.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = " STAND "
+
+[node name="ResetButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
+margin_top = 397.0
+margin_right = 145.0
+margin_bottom = 446.0
+custom_fonts/font = ExtResource( 1 )
+text = " RESET "
+
+[node name="RightVbox" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
+margin_left = 149.0
+margin_right = 910.0
+margin_bottom = 446.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PlayerScoreLabel" type="Label" parent="."]
+margin_left = 351.26
+margin_top = 303.641
+margin_right = 655.26
+margin_bottom = 346.641
+custom_fonts/font = ExtResource( 1 )
+text = "Player Score: 21"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DealerScoreLabel" type="Label" parent="."]
+margin_left = 351.26
+margin_top = 236.865
+margin_right = 674.26
+margin_bottom = 279.865
+custom_fonts/font = ExtResource( 1 )
+text = "Dealer Score: ???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/HitButton" to="Dealer" method="_on_HitButton_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/StandButton" to="Dealer" method="_on_StandButton_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/ResetButton" to="Dealer" method="_on_ResetButton_pressed"]

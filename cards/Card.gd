@@ -8,6 +8,7 @@ export (bool) var face_up setget set_face_up
 export (String) var img_path
 
 
+
 func set_face_up(value: bool):
 	face_up = value
 	display()
