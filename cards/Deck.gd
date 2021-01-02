@@ -7,7 +7,7 @@ var cards := {}
 func reset_deck() -> void:
 	var count := 1
 	var file = File.new()
-	file.open("res://assets/playing-cards-pack/PNG/Cards (large)/_cards52.csv", file.READ)
+	file.open("res://assets/playing-cards-pack/PNG/Cards (large)/_cards52.res", file.READ)
 	cards.clear() # reset
 	while !file.eof_reached():
 		var line_array: PoolStringArray = file.get_csv_line ()

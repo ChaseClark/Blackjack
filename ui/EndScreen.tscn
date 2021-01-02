@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://ui/menu_style.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/robotomono_64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/EndScreen.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.00679117, 0.439728 )
+colors = PoolColorArray( 0.305882, 0.00392157, 0.00392157, 0.54902, 0.761719, 0, 0, 1, 0.386719, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.993464, 0.182955 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 30.0
+gravity = Vector3( 0, 100, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 30.0
+angle_random = 0.5
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 5 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="EndScreen" type="CanvasLayer"]
+pause_mode = 2
+layer = 2
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+pause_mode = 2
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+pause_mode = 2
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 560.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_right = 944.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 2 )
+text = " You Win!"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 90.0
+margin_right = 944.0
+margin_bottom = 520.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
+pause_mode = 2
+margin_left = 333.0
+margin_top = 169.0
+margin_right = 611.0
+margin_bottom = 261.0
+mouse_filter = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+pause_mode = 2
+margin_right = 278.0
+margin_bottom = 92.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = ExtResource( 2 )
+text = " Reset "
+
+[node name="ConfettiContainer" type="Node2D" parent="."]
+pause_mode = 2
+
+[node name="Particles2D" type="Particles2D" parent="ConfettiContainer"]
+position = Vector2( 517.151, 220.315 )
+scale = Vector2( 10, 10 )
+emitting = false
+amount = 50
+lifetime = 2.0
+explosiveness = 0.6
+randomness = 0.2
+process_material = SubResource( 1 )
+
+[node name="Particles2D2" type="Particles2D" parent="ConfettiContainer"]
+position = Vector2( 783.175, 281.489 )
+scale = Vector2( 10, 10 )
+emitting = false
+amount = 50
+lifetime = 2.0
+explosiveness = 0.6
+randomness = 0.2
+process_material = SubResource( 1 )
+
+[node name="Particles2D3" type="Particles2D" parent="ConfettiContainer"]
+position = Vector2( 208.474, 305.061 )
+scale = Vector2( 10, 10 )
+emitting = false
+amount = 50
+lifetime = 2.0
+explosiveness = 0.6
+randomness = 0.2
+process_material = SubResource( 1 )
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ResetButton" to="." method="_on_ResetButton_pressed"]

@@ -2,8 +2,7 @@ extends Node2D
 
 
 # responsible for keeping score / starting the game / determining win or lose
-
-
+const EndScreen = preload("res://ui/EndScreen.tscn")
 const Card = preload("res://cards/Card.tscn")
 const CARD_SPACING = 40
 const card_shuffle_audio = preload("res://assets/kenney_casinoaudio/chosen_audio/cardFan1.ogg")
@@ -17,11 +16,11 @@ onready var player_card_pos = get_node("../PlayerCardPos")
 onready var dealer_card_pos = get_node("../DealerCardPos")
 onready var hit_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbox/HitButton")
 onready var stand_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbox/StandButton")
-onready var reset_button = get_node("../UI/MarginContainer/HBoxContainer/LeftVbox/ResetButton")
 onready var player_score_label = get_node("../PlayerScoreLabel")
 onready var dealer_score_label = get_node("../DealerScoreLabel")
 onready var card_tween = $CardTween
 onready var audio_player = $AudioStreamPlayer
+onready var ui = get_node("../UI")
 
 
 var player_cards = []
@@ -144,15 +143,27 @@ func calculate_dealer_score() -> void:
 	
 
 func lost():
-	print("player loses! score:", player_score, " dealer score: ",dealer_score)
+	yield(get_tree().create_timer(1.5),"timeout")
+	var end = EndScreen.instance()
+	end.initialize("You lose :( Try Again", false)
+	add_child(end)
+	get_tree().paused = true
 		
 
 func won():
-	print("you beat the dealer!")
+	yield(get_tree().create_timer(1.5),"timeout")
+	var end = EndScreen.instance()
+	end.initialize("Yay! You beat the dealer!", true)
+	add_child(end)
+	get_tree().paused = true
 	
 
 func tied():
-	print("you tied the dealer!")
+	yield(get_tree().create_timer(1.5),"timeout")
+	var end = EndScreen.instance()
+	end.initialize("You tied the dealer!", false)
+	add_child(end)
+	get_tree().paused = true
 	
 
 func _on_HitButton_pressed() -> void:
@@ -163,7 +174,6 @@ func _on_HitButton_pressed() -> void:
 		lost()
 		hit_button.disabled = true
 		stand_button.disabled = true
-		reset_button.disabled = false
 	else:
 		hit_button.disabled = false
 	
@@ -192,7 +202,3 @@ func _on_StandButton_pressed() -> void:
 		tied()
 	else:
 		won()
-	
-
-func _on_ResetButton_pressed() -> void:
-	get_tree().change_scene("res://Main.tscn")

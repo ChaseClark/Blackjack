@@ -27,7 +27,6 @@ position = Vector2( 400, 140 )
 position = Vector2( 400, 450 )
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 margin_left = 8.25989
@@ -56,27 +55,22 @@ custom_constants/separation = 30
 alignment = 2
 
 [node name="HitButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
-margin_top = 238.0
+margin_top = 317.0
 margin_right = 145.0
-margin_bottom = 287.0
+margin_bottom = 366.0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 1 )
 disabled = true
 text = "HIT"
 
 [node name="StandButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
-margin_top = 317.0
-margin_right = 145.0
-margin_bottom = 366.0
-custom_fonts/font = ExtResource( 1 )
-disabled = true
-text = " STAND "
-
-[node name="ResetButton" type="Button" parent="UI/MarginContainer/HBoxContainer/LeftVbox"]
 margin_top = 396.0
 margin_right = 145.0
 margin_bottom = 445.0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 1 )
-text = " RESET "
+disabled = true
+text = " STAND "
 
 [node name="RightVbox" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
 margin_left = 149.0
@@ -85,27 +79,26 @@ margin_bottom = 445.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="PlayerScoreLabel" type="Label" parent="."]
-margin_left = 351.26
-margin_top = 303.641
-margin_right = 655.26
-margin_bottom = 346.641
-custom_fonts/font = ExtResource( 1 )
-text = "Player Score: 21"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DealerScoreLabel" type="Label" parent="."]
-margin_left = 351.26
+margin_left = 350.0
 margin_top = 236.865
-margin_right = 674.26
+margin_right = 673.0
 margin_bottom = 279.865
 custom_fonts/font = ExtResource( 1 )
 text = "Dealer Score: ???"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerScoreLabel" type="Label" parent="."]
+margin_left = 350.0
+margin_top = 335.139
+margin_right = 673.0
+margin_bottom = 378.139
+custom_fonts/font = ExtResource( 1 )
+text = "Player Score: ???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/HitButton" to="Dealer" method="_on_HitButton_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/StandButton" to="Dealer" method="_on_StandButton_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/HBoxContainer/LeftVbox/ResetButton" to="Dealer" method="_on_ResetButton_pressed"]
