@@ -1,0 +1,13 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+valid=false
+
+[deps]
+
+source_file="res://assets/playing-cards-pack/PNG/Cards (large)/_cards52.csv"
+[params]
+
+compress=true
+delimiter=0

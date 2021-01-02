@@ -4,24 +4,43 @@ class_name Deck
 # going to need methods like: draw_dealer(face_up: bool), draw_player()
 var cards := {}
 
+#func reset_deck() -> void:
+#	var count := 1
+#	var file = File.new()
+#	file.open("res://assets/playing-cards-pack/PNG/Cards (large)/_cards52.csv", file.READ)
+#	cards.clear() # reset
+#	while !file.eof_reached():
+#		var line_array: PoolStringArray = file.get_csv_line ()
+#		if line_array.size() == 1:
+#			var key: String = line_array[0]
+#			if key.length() > 0:
+#				# use count to determine value
+#				# since our csv file is ordered nicely
+#				cards[key] = get_card_value(count)
+#				# print(key,"  ", get_card_value(count))
+#				count += 1
+#				if count == 14:
+#					count = 1
+#	file.close()
+
+# refactor to use txt file so that Godot can actually export it??????!~?!?!?!?
 func reset_deck() -> void:
 	var count := 1
 	var file = File.new()
-	file.open("res://assets/playing-cards-pack/PNG/Cards (large)/_cards52.res", file.READ)
+	file.open("res://assets/cards52.txt", file.READ)
 	cards.clear() # reset
 	while !file.eof_reached():
-		var line_array: PoolStringArray = file.get_csv_line ()
-		if line_array.size() == 1:
-			var key: String = line_array[0]
-			if key.length() > 0:
-				# use count to determine value
-				# since our csv file is ordered nicely
-				cards[key] = get_card_value(count)
-				# print(key,"  ", get_card_value(count))
-				count += 1
-				if count == 14:
-					count = 1
+		var line: String = file.get_line()
+		if line.length() > 0:
+			# use count to determine value
+			# since our csv file is ordered nicely
+			cards[line] = get_card_value(count)
+			# print(key,"  ", get_card_value(count))
+			count += 1
+			if count == 14:
+				count = 1
 	file.close()
+
 
 
 func get_card_value(i: int) -> int:
